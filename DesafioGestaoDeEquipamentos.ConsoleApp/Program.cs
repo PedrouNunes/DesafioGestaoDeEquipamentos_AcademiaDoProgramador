@@ -68,10 +68,24 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 fabricante = fabricanteExcluir;
                 data1 = data1Excluir;
             }
+            static void alterarChamado(ref int posicao, ref String[] titulo, ref String data)
+            {
+                Console.WriteLine("Edite o título do chamado: ");
+                titulo[posicao] = Console.ReadLine();
 
+                Console.WriteLine();
 
+                Console.WriteLine("Edite a posição do equipamento equivalente ao chamado: ");
+                posicao = Convert.ToInt32(Console.ReadLine());
 
-            int  editar, excluir, nEquipamento, dia, mes, ano;
+                Console.WriteLine();
+
+                Console.WriteLine("Edite a data de abertura do chamado: ");
+                data = Console.ReadLine();         
+            }
+
+            #region Declaração de Variáveis
+            int editar, excluir, nEquipamento, dia, mes, ano, dia2, mes2, ano2;
             bool editarMais, registrarNovo, excluirEquipamento, novoChamado;
             char sim, registrar, excluir2, chamado;
             
@@ -88,7 +102,9 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
             string[] descricaoChamado = new string[1000];
 
             int i = 0;
+            #endregion
 
+            #region ler os dados do equipamento
             do
             {
                 Console.Write("Digite o nome do equipamento " + i + ": ");
@@ -128,7 +144,9 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 i = i + 1;
             } while (registrarNovo == true);
+            #endregion
 
+            #region editar equipamento
             do
             {
                 Console.Write("Digite a posição do elemento que deseja editar (Se não deseja editar nenhum digite 00): ");
@@ -155,16 +173,13 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
               editarMais = sim == 'S';
             } while (editarMais == true);
 
+            #endregion
 
+            #region excluir equipamento
             do
             {
                 Console.WriteLine("Digite a posição do equipamento que deseja excluir: ");
                 excluir = Convert.ToInt32(Console.ReadLine());
-
-                if (excluir == 00)
-                {
-                    break;
-                }
 
 
                 removerEquipamento(nome, fabricante, preco, nSerie, data1, excluir);
@@ -174,9 +189,13 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
             excluirEquipamento = excluir2 == 'S';
             } while (excluirEquipamento == true);
 
+            #endregion
+
             Console.WriteLine();
             i = 0;
             Console.WriteLine("Registro de chamados");
+
+            #region ler dados do chamado
             do
             {
                 Console.WriteLine("Digite o título do chamado: ");
@@ -223,13 +242,32 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 i = i + 1;
 
                 Console.WriteLine("Deseja adicionar mais um chamado? Digite S para sim ou N para não: ");
-                chamado = Convert.ToChar(dataQuebrada[i]);
+                chamado = Convert.ToChar(Console.ReadLine());
 
                 novoChamado = chamado == 'S';
             } while (novoChamado == true);
 
+            #endregion
 
+            #region editar chamado
 
+            alterarChamado(ref nEquipamento, ref tituloChamado, ref dataChamado);
+
+            String[] dataQuebrada2 = dataChamado.Split("/");
+
+            dia2 = Convert.ToInt32(dataQuebrada2[nEquipamento]);
+            mes2 = Convert.ToInt32(dataQuebrada2[nEquipamento + 1]);
+            ano2 = Convert.ToInt32(dataQuebrada2[nEquipamento + 2]);
+
+            DateTime dataAberturaChamado2 = new DateTime(ano, mes, dia);
+
+            TimeSpan diasAberto2 = DateTime.Today - dataAberturaChamado2;
+
+            double dias2 = diasAberto2.TotalDays;
+
+            Console.WriteLine("Titulo do chamado: " +  tituloChamado[nEquipamento] + ", nome do equipamento editado: " + nome[nEquipamento] + ", data de abertura do chamado: " + dataChamado + ", numero de dias que o chamado está aberto: " + dias2);
+
+            #endregion
         }
     }
 }
