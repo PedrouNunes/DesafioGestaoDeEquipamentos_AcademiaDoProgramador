@@ -7,25 +7,21 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
         static void Main(string[] args)
         {
             int quantidade, editar;
-            bool editarMais;
-            char sim;
+            bool editarMais, registrarNovo;
+            char sim, registrar;
 
-            Console.Write("Digite a quantidade de equipamentos: ");
-            quantidade = Convert.ToInt32((Console.ReadLine()));
+            string[] nome = new string[100000];
+            string[] fabricante = new string[100000];
 
-            string[] nome = new string[quantidade];
-            string[] fabricante = new string[quantidade];
+            double[] preco = new double[100000];
+            string[] nSerie = new string[100000];
+            String[] data1 = new string[100000];
 
-            double[] preco = new double[quantidade];
-            string[] nSerie = new string[quantidade];
 
-            int[] dia = new int[quantidade];
-            int[] mes = new int[quantidade];
-            int[] ano = new int[quantidade];
-           // DateTime[] dataFabricacao = new DateTime[quantidade];
 
-            for (int i = 0; i < quantidade; i++)
+            do
             {
+                int i = 0;
                 Console.Write("Digite o nome do equipamento " + i + ": ");
                 nome[i] = Console.ReadLine();
 
@@ -41,39 +37,28 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 Console.WriteLine();
 
-                Console.Write("Digite o dia de fabricação do equipamento " + i + ": ");
-                dia[i] = Convert.ToInt32((Console.ReadLine()));
-
-                Console.WriteLine();
-
-                Console.Write("Digite o mês de fabricação do equipamento " + i + ": ");
-                mes[i] = Convert.ToInt32((Console.ReadLine()));
-
-                Console.WriteLine();
-
-                Console.Write("Digite o ano de fabricação do equipamento " + i + ": ");
-                ano[i] = Convert.ToInt32((Console.ReadLine()));
+                //Console.Write("Digite a data de fabricação do equipamento " + i + ": ");
+                //data1[i] = Console.ReadLine();
+                //string[] data = data1[i].Split("/");
+                //contArrayData = contArrayData + data.Length;
 
                 Console.WriteLine();
 
                 Console.Write("Digite o nome do fabricante: ");
                 fabricante[i] = Console.ReadLine();
                 Console.WriteLine();
-            }
 
-            for (int i = 0;i < quantidade; i++)
-            {
-                Console.Write("Nome do equipamento " + i + ": " + nome[i]);
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.Write("Numero de série do equipamento " + i + ": " + nSerie[i]);
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.Write("Nome do fabricante do equipamento " + i + ": " + fabricante[i]);
-                Console.WriteLine();
-                Console.WriteLine();
-            }
+                Console.WriteLine("Nome do equipamento: " + nome[i] + ", numero de série: " + nSerie[i] + ", fabricante: " + fabricante[i]);
 
+                do {
+                    Console.WriteLine("Deseja registrar mais um equipamento? Digite S para sim, ou N para não");
+                    registrar = Convert.ToChar(Console.ReadLine());
+                }while(registrar != 'S' && registrar != 0);
+
+                i = i + 1;      
+            registrarNovo = registrar == 'S';
+            }while (registrarNovo == true);
+           
             do
             {
                 Console.Write("Digite a posição do elemento que deseja editar: ");
@@ -95,17 +80,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 Console.WriteLine();
 
                 Console.Write("Edite o dia de fabricação do equipamento: ");
-                dia[editar] = Convert.ToInt32((Console.ReadLine()));
 
-                Console.WriteLine();
-
-                Console.Write("Edite o mês de fabricação do equipamento: ");
-                mes[editar] = Convert.ToInt32((Console.ReadLine()));
-
-                Console.WriteLine();
-
-                Console.Write("Edite o ano de fabricação do equipamento: ");
-                ano[editar] = Convert.ToInt32((Console.ReadLine()));
 
                 Console.WriteLine();
 
