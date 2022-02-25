@@ -16,12 +16,11 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
             double[] preco = new double[100000];
             string[] nSerie = new string[100000];
             String[] data1 = new string[100000];
-
+            int i = 0;
 
 
             do
             {
-                int i = 0;
                 Console.Write("Digite o nome do equipamento " + i + ": ");
                 nome[i] = Console.ReadLine();
 
@@ -34,8 +33,6 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 Console.Write("Digite o numero de série do equipamento " + i + ": ");
                 nSerie[i] = Console.ReadLine();
-
-                Console.WriteLine();
 
                 //Console.Write("Digite a data de fabricação do equipamento " + i + ": ");
                 //data1[i] = Console.ReadLine();
@@ -55,14 +52,20 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     registrar = Convert.ToChar(Console.ReadLine());
                 }while(registrar != 'S' && registrar != 0);
 
+                Console.WriteLine();
                 i = i + 1;      
             registrarNovo = registrar == 'S';
             }while (registrarNovo == true);
            
             do
             {
-                Console.Write("Digite a posição do elemento que deseja editar: ");
+                Console.Write("Digite a posição do elemento que deseja editar (Se não deseja editar nenhum digite 00): ");
                 editar = Convert.ToInt32(Console.ReadLine());
+
+                if (editar == 00)
+                {
+                    break;
+                }
 
                 Console.Write("Edite o nome do equipamento: ");
                 nome[editar] = Console.ReadLine();
