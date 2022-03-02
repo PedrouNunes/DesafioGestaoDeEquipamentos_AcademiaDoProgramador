@@ -147,7 +147,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 Console.WriteLine("Edite a data de abertura do chamado " + alterarChamado + ": ");
                 data = Console.ReadLine();         
             }
-            static void excluirChamado(ref int posicao, ref string[] titulo, ref string data, ref string[] descricaoChamado,  int alterarChamado)
+            static void excluirChamado(ref int posicao, ref string[] titulo, ref string data, ref string[] descricaoChamado,  int posicaoChamado)
             {
                 Console.WriteLine("Digite a posição do chamado que deseja excluir: ");
                 int excluir = Convert.ToInt32(Console.ReadLine());
@@ -179,7 +179,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
 
             #region Declaração de Variáveis
-            int   nEquipamento = 0, dia, mes, ano, dia2, mes2, ano2, menu, posicaoChamado;
+            int   nEquipamento = 0, dia, mes, ano, dia2, mes2, ano2, menu, posicaoChamado, posicaoChamado2;
             char sairOuContinuar;
             
 
@@ -290,6 +290,14 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                     Console.WriteLine("Titulo do chamado: " + tituloChamado[nEquipamento] + ", nome do equipamento editado: " + nome[nEquipamento] + ", data de abertura do chamado: " + dataChamado + ", numero de dias que o chamado está aberto: " + dias2);
 
+                    #endregion
+                }
+                if (menu == 5)
+                {
+                    #region Exluir Chamado
+                    Console.WriteLine("Digite a posição do chamado para ser excluida: ");
+                    posicaoChamado2 = Convert.ToInt32(Console.ReadLine());
+                    excluirChamado(ref nEquipamento, ref tituloChamado, ref dataChamado, ref descricaoChamado, posicaoChamado2);
                     #endregion
                 }
 
