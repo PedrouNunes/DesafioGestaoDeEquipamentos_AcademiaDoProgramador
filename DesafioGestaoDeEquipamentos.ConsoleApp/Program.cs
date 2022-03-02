@@ -147,6 +147,36 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 Console.WriteLine("Edite a data de abertura do chamado " + alterarChamado + ": ");
                 data = Console.ReadLine();         
             }
+            static void excluirChamado(ref int posicao, ref string[] titulo, ref string data, ref string[] descricaoChamado,  int alterarChamado)
+            {
+                Console.WriteLine("Digite a posição do chamado que deseja excluir: ");
+                int excluir = Convert.ToInt32(Console.ReadLine());
+                int posicaoParaRemover = 0, j = 0;
+
+                for (int k = 0; k < titulo.Length; k++)
+                {
+                    if (k == excluir)
+                    {
+                        posicaoParaRemover = posicaoParaRemover + 1;
+                    }
+                }
+                string[] tituloExcluir = new string[titulo.Length - posicaoParaRemover];
+                string[] descricaoExcluir = new string[titulo.Length - posicaoParaRemover];
+
+                for (int l = 0; l < titulo.Length; l++)
+                {
+                    if (l != excluir)
+                    {
+                        tituloExcluir[j] = titulo[l];
+                        descricaoExcluir[j] = descricaoChamado[l];
+                        data = null;
+                        j = j + 1;
+                    }
+                }
+                titulo = tituloExcluir;
+                descricaoChamado = descricaoExcluir;
+            }
+
 
             #region Declaração de Variáveis
             int   nEquipamento = 0, dia, mes, ano, dia2, mes2, ano2, menu, posicaoChamado;
@@ -263,8 +293,10 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     #endregion
                 }
 
-                Console.WriteLine("Deseja continuar? Didite 'C' para continuar ou 'S' para sair: ");
-                sairOuContinuar = Convert.ToChar(Console.ReadLine());
+                do {
+                    Console.WriteLine("Deseja continuar? Didite 'C' para continuar ou 'S' para sair: ");
+                    sairOuContinuar = Convert.ToChar(Console.ReadLine());
+                }while (sairOuContinuar != 'C' && sairOuContinuar != 'S');
 
                 i = i + 1;
             }while (sairOuContinuar == 'C');
