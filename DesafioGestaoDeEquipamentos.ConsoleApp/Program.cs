@@ -125,33 +125,32 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 Console.WriteLine();
             }
-            static void alterarChamado(ref int posicao, ref string[] titulo, ref string data, ref string[] descricaoChamado)
+            static void alterarChamado(ref int posicao, ref string[] titulo, ref string data, ref string[] descricaoChamado, int alterarChamado)
             {
-                Console.WriteLine("Edite o título do chamado: ");
+                Console.WriteLine("Edite o título do chamado " + alterarChamado + ": ");
                 titulo[posicao] = Console.ReadLine();
 
                 Console.WriteLine();
 
-                Console.WriteLine("Digite a descrição do equipamento equivalente ao chamado: ");
+                Console.WriteLine("Edite a descrição do equipamento equivalente ao chamado " + alterarChamado + ": ");
                 descricaoChamado[posicao] = Console.ReadLine();
 
                 Console.WriteLine();
 
-                Console.WriteLine("Edite a posição do equipamento equivalente ao chamado: ");
+                Console.WriteLine("Edite a posição do equipamento equivalente ao chamado " + alterarChamado + ": ");
                 posicao = Convert.ToInt32(Console.ReadLine());
 
                 Console.WriteLine();
 
                 Console.WriteLine();
 
-                Console.WriteLine("Edite a data de abertura do chamado: ");
+                Console.WriteLine("Edite a data de abertura do chamado " + alterarChamado + ": ");
                 data = Console.ReadLine();         
             }
 
             #region Declaração de Variáveis
-            int  excluir, nEquipamento = 0, dia, mes, ano, dia2, mes2, ano2, menu;
-            bool editarMais, registrarNovo, excluirEquipamento, novoChamado;
-            char sim, registrar, excluir2, chamado, sairOuContinuar;
+            int   nEquipamento = 0, dia, mes, ano, dia2, mes2, ano2, menu, posicaoChamado;
+            char sairOuContinuar;
             
 
             string[] nome = new string[1000];
@@ -167,6 +166,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
             int i = 0;
 
             #endregion
+
             do
             {
                 do
@@ -174,7 +174,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     Console.WriteLine("Digite 1 para adicionar um equipamento: ");
                     Console.WriteLine("Digite 2 para editar um equipamento: ");
                     Console.WriteLine("Digite 3 para excluir um equipamento: ");
-                    Console.WriteLine("Digite 4 para adicionar um chamado: ");
+                    Console.WriteLine("Digite 4 para controle de chamados: ");
                     Console.WriteLine("Digite 5 para editar um chamado: ");
                     Console.WriteLine("Digite 6 para excluir um chamado: ");                  
                     menu = Convert.ToInt32(Console.ReadLine());
@@ -212,7 +212,6 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 Console.WriteLine();
                 i = 0;
-                Console.WriteLine("Registro de chamados");
 
                 if (menu == 4)
                 {
@@ -241,9 +240,11 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 }
                 if (menu == 5)
                 {
+                    Console.WriteLine("Digite a posição do chamado para ser alterado: ");
+                    posicaoChamado = Convert.ToInt32(Console.ReadLine());  
                     #region editar chamado
 
-                    alterarChamado(ref nEquipamento, ref tituloChamado, ref dataChamado, ref descricaoChamado);
+                    alterarChamado(ref nEquipamento, ref tituloChamado, ref dataChamado, ref descricaoChamado, posicaoChamado);
 
                     string[] dataQuebrada2 = dataChamado.Split("/");
 
