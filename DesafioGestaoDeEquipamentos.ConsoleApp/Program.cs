@@ -7,9 +7,10 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
         static void Main(string[] args)
         {
             static void lerEquipamento(ref string[] nome, ref string[] fabricante, ref double[] preco, ref string[] nSerie, ref string[] data1, int i) {
-                
+                do {
                     Console.Write("Digite o nome do equipamento " + i + ": ");
                     nome[i] = Console.ReadLine();
+                }while(nome[i].Length < 6);
 
                     Console.WriteLine();
 
@@ -32,11 +33,16 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     fabricante[i] = Console.ReadLine();
                     Console.WriteLine();
             }
-            static void alterarEquipamento(ref string[] nome, ref string[] fabricante, ref double[] preco, ref string[] nSerie, ref string[] data1, int editar)
-            {    
+            static void alterarEquipamento(ref string[] nome, ref string[] fabricante, ref double[] preco, ref string[] nSerie, ref string[] data1)
+            {
+                int editar;
+                Console.Write("Digite a posição do elemento que deseja editar: ");
+                editar = Convert.ToInt32(Console.ReadLine());
 
-                Console.Write("Edite o nome do equipamento " + editar + ": ");
-                nome[editar] = Console.ReadLine();
+                do {
+                    Console.Write("Edite o nome do equipamento " + editar + ": ");
+                    nome[editar] = Console.ReadLine();
+                }while(nome[editar].Length < 6);
 
                 Console.WriteLine();
 
@@ -224,11 +230,8 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 if (menu == 2)
                 {
                     #region editar equipamento
-                    int editar;
-                    Console.Write("Digite a posição do elemento que deseja editar: ");
-                    editar = Convert.ToInt32(Console.ReadLine());
 
-                    alterarEquipamento(ref nome, ref fabricante, ref preco, ref nSerie, ref data1, editar);
+                    alterarEquipamento(ref nome, ref fabricante, ref preco, ref nSerie, ref data1);
 
                     #endregion
                 }
