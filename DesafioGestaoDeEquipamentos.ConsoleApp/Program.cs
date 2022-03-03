@@ -292,7 +292,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 }
  
                 do {
-                    Console.WriteLine("Deseja continuar? Didite 'C' para continuar ou 'S' para sair: ");
+                    Console.WriteLine("Deseja continuar? Digite 'C' para continuar ou 'S' para sair: ");
                     sairOuContinuar = Convert.ToChar(Console.ReadLine());
 
                 }while (sairOuContinuar != 'C' && sairOuContinuar != 'S');
