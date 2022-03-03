@@ -251,6 +251,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 }
                 #endregion
 
+                #region Chamado
                 if (menu == 5)
                 {
                     #region ler dados do chamado
@@ -271,7 +272,9 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 {
                     exibirChamado(ref tituloChamado, ref descricaoChamado, ref nEquipamento, ref dataChamado, ref dias, ref nome);
                 }
-                do {
+                #endregion
+                do
+                {
                     Console.WriteLine("Deseja chamar o menu novamente? Digite 'C' para continuar ou 'S' para sair: ");
                     sairOuContinuar = Convert.ToChar(Console.ReadLine());
 
