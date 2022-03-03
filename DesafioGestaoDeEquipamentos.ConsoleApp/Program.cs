@@ -66,7 +66,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 Console.WriteLine(); 
             }
-            static void removerEquipamento(string[] nome, string[] fabricante, double[] preco, string[] nSerie, string[] data1)
+            static void removerEquipamento(string[] nome, string[] fabricante, double[] preco, string[] nSerie, string[] data1, int[] posicao)
             {
                 Console.WriteLine("Digite a posição do equipamento que deseja excluir: ");
                 int excluir = Convert.ToInt32(Console.ReadLine());
@@ -74,15 +74,24 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                
                 for (int l = 0; l < nome.Length; l++)
                 {
-                    if (l == excluir)
+                    if (excluir == posicao[l])
                     {
-                         nome[l] = null;
-                         preco[l] = -1;
-                         nSerie[l] = null;
-                         fabricante[l] = null;
-                         data1[l] = null;
-                        j = j + 1;
+                        Console.WriteLine("Este equipamento está vinculado a um chamado, ele não pode ser excluido!");
+                        break;
                     }
+                    else
+                    {
+                        if (l == excluir)
+                        {
+                            nome[l] = null;
+                            preco[l] = -1;
+                            nSerie[l] = null;
+                            fabricante[l] = null;
+                            data1[l] = null;
+                            j = j + 1;
+                        }
+                    }
+                       
                 }
             }
             static void exibir(string[] nome, string[] fabricante, double[] preco, string[] nSerie, string[] data1)
@@ -240,7 +249,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 {
                     #region excluir equipamento 
 
-                    removerEquipamento(nome, fabricante, preco, nSerie, data1);
+                    removerEquipamento(nome, fabricante, preco, nSerie, data1, nEquipamento);
 
                     #endregion
                 }
@@ -275,6 +284,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 #endregion
                 do
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Deseja chamar o menu novamente? Digite 'C' para continuar ou 'S' para sair: ");
                     sairOuContinuar = Convert.ToChar(Console.ReadLine());
 
