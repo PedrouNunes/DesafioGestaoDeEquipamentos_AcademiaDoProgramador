@@ -194,13 +194,14 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     Console.WriteLine("Digite 1 para adicionar um equipamento: ");
                     Console.WriteLine("Digite 2 para editar um equipamento: ");
                     Console.WriteLine("Digite 3 para excluir um equipamento: ");
-                    Console.WriteLine("Digite 4 para controle de chamados: ");
-                    Console.WriteLine("Digite 5 para editar um chamado: ");
-                    Console.WriteLine("Digite 6 para excluir um chamado: ");
-                    Console.WriteLine("Digite 7 para ver os equipamentos: "); 
+                    Console.WriteLine("Digite 4 para ver os equipamentos: ");
+                    Console.WriteLine("Digite 5 para controle de chamados: ");
+                    Console.WriteLine("Digite 6 para editar um chamado: ");
+                    Console.WriteLine("Digite 7 para excluir um chamado: ");              
                     menu = Convert.ToInt32(Console.ReadLine());
                 } while (menu != 1 && menu != 2 && menu != 3 && menu != 4 && menu != 5 && menu != 6 && menu != 7);
 
+                #region Equipamento
                 if (menu == 1)
                 {
                     #region ler os dados do equipamento
@@ -227,8 +228,14 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                     #endregion
                 }
-           
+
                 if (menu == 4)
+                {
+                    exibir(nome, fabricante, preco, nSerie, data1);
+                }
+                #endregion
+
+                if (menu == 5)
                 {
                     #region ler dados do chamado
 
@@ -249,11 +256,9 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     Console.WriteLine("Titulo do chamado: " + tituloChamado[nEquipamento] + ", nome do equipamento editado: " + nome[nEquipamento] + ", data de abertura do chamado: " + dataChamado + ", numero de dias que o chamado está aberto: " + dias);
 
                     c = c + 1;
-
-
                     #endregion
                 }
-                if (menu == 5)
+                if (menu == 6)
                 {
                     Console.WriteLine("Digite a posição do chamado para ser alterado: ");
                     posicaoChamado = Convert.ToInt32(Console.ReadLine());  
@@ -277,7 +282,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                     #endregion
                 }
-                if (menu == 6)
+                if (menu == 7)
                 {
                     #region Exluir Chamado
                     Console.WriteLine("Digite a posição do chamado para ser excluida: ");
@@ -285,12 +290,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     excluirChamado(ref nEquipamento, ref tituloChamado, ref dataChamado, ref descricaoChamado, posicaoChamado2);
                     #endregion
                 }
-                if(menu == 7)
-                {
-                    exibir(nome, fabricante, preco, nSerie, data1);
-                }
-
-                
+ 
                 do {
                     Console.WriteLine("Deseja continuar? Didite 'C' para continuar ou 'S' para sair: ");
                     sairOuContinuar = Convert.ToChar(Console.ReadLine());
