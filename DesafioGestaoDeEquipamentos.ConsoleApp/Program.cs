@@ -7,29 +7,30 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
         static void Main(string[] args)
         {
             static void lerEquipamento(ref string[] nome, ref string[] fabricante, ref double[] preco, ref string[] nSerie, ref string[] data1, int i) {
-                Console.Write("Digite o nome do equipamento " + i + ": ");
-                nome[i] = Console.ReadLine();
+                
+                    Console.Write("Digite o nome do equipamento " + i + ": ");
+                    nome[i] = Console.ReadLine();
 
-                Console.WriteLine();
+                    Console.WriteLine();
 
-                Console.Write("Digite o preço de aquisição do equipamento " + i + ": ");
-                preco[i] = Convert.ToDouble(Console.ReadLine());
+                    Console.Write("Digite o preço de aquisição do equipamento " + i + ": ");
+                    preco[i] = Convert.ToDouble(Console.ReadLine());
 
-                Console.WriteLine();
+                    Console.WriteLine();
 
-                Console.Write("Digite o numero de série do equipamento " + i + ": ");
-                nSerie[i] = Console.ReadLine();
+                    Console.Write("Digite o numero de série do equipamento " + i + ": ");
+                    nSerie[i] = Console.ReadLine();
 
-                Console.WriteLine();
+                    Console.WriteLine();
 
-                Console.Write("Digite a data de fabricação do equipamento " + i + ": ");
-                data1[i] = Console.ReadLine();
+                    Console.Write("Digite a data de fabricação do equipamento " + i + ": ");
+                    data1[i] = Console.ReadLine();
 
-                Console.WriteLine();
+                    Console.WriteLine();
 
-                Console.Write("Digite o nome do fabricante: ");
-                fabricante[i] = Console.ReadLine();
-                Console.WriteLine();
+                    Console.Write("Digite o nome do fabricante: ");
+                    fabricante[i] = Console.ReadLine();
+                    Console.WriteLine();
             }
             static void alterarEquipamento(ref string[] nome, ref string[] fabricante, ref double[] preco, ref string[] nSerie, ref string[] data1, int editar)
             {    
@@ -63,43 +64,31 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
             {
                 Console.WriteLine("Digite a posição do equipamento que deseja excluir: ");
                 int excluir = Convert.ToInt32(Console.ReadLine());
-                int posicaoParaRemover = 0, j = 0;
-
-                for (int k = 0; k < nome.Length; k++)
-                {
-                    if (k == excluir)
-                    {
-                        posicaoParaRemover = posicaoParaRemover + 1;
-                    }
-                }
-                string[] nomeExcluir = new string[nome.Length - posicaoParaRemover];
-                string[] fabricanteExcluir = new string[nome.Length - posicaoParaRemover];
-
-                double[] precoExcluir = new double[nome.Length - posicaoParaRemover];
-                string[] nSerieExcluir = new string[nome.Length - posicaoParaRemover];
-                String[] data1Excluir = new string[nome.Length - posicaoParaRemover];
+                int j = 0;
+               
                 for (int l = 0; l < nome.Length; l++)
                 {
-                    if (l != excluir)
+                    if (l == excluir)
                     {
-                        nomeExcluir[j] = nome[l];
-                        precoExcluir[j] = preco[l];
-                        nSerieExcluir[j] = nSerie[l];
-                        fabricanteExcluir[j] = fabricante[l];
-                        data1Excluir[j] = data1[l];
+                         nome[l] = null;
+                         preco[l] = -1;
+                         nSerie[l] = null;
+                         fabricante[l] = null;
+                         data1[l] = null;
                         j = j + 1;
                     }
                 }
-                nome = nomeExcluir;
-                preco = precoExcluir;
-                nSerie = nSerieExcluir;
-                fabricante = fabricanteExcluir;
-                data1 = data1Excluir;
             }
-            static void exibir(string[] nome, string[] nSerie, string[] fabricante, int i)
+            static void exibir(string[] nome, string[] fabricante, double[] preco, string[] nSerie, string[] data1)
             {
-                Console.WriteLine("Nome do equipamento " + i  + nome[i] + ", numero de série: " + nSerie[i] + ", fabricante: " + fabricante[i]);
-                Console.WriteLine();
+                for (int j = 0; j < nome.Length; j++)
+                {
+                    if (nome[j] != null && nSerie[j] != null && fabricante[j] != null && data1[j] != null && preco[j] != -1)
+                    {
+                        Console.WriteLine("Nome do equipamento: " + j + " " + nome[j] + ", numero de série: " + nSerie[j] + ", fabricante: " + fabricante[j]);
+                        Console.WriteLine();
+                    }
+                }
             }
             static void lerChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string dataChamado, ref int nEquipamento, int i)
             {
@@ -206,16 +195,15 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     Console.WriteLine("Digite 3 para excluir um equipamento: ");
                     Console.WriteLine("Digite 4 para controle de chamados: ");
                     Console.WriteLine("Digite 5 para editar um chamado: ");
-                    Console.WriteLine("Digite 6 para excluir um chamado: ");                  
+                    Console.WriteLine("Digite 6 para excluir um chamado: ");
+                    Console.WriteLine("Digite 7 para ver os equipamentos: "); 
                     menu = Convert.ToInt32(Console.ReadLine());
-                } while (menu != 1 && menu != 2 && menu != 3 && menu != 4 && menu != 5 && menu != 6);
+                } while (menu != 1 && menu != 2 && menu != 3 && menu != 4 && menu != 5 && menu != 6 && menu != 7);
 
                 if (menu == 1)
                 {
                     #region ler os dados do equipamento
                     lerEquipamento(ref nome, ref fabricante, ref preco, ref nSerie, ref data1, i);
-                    exibir(nome, nSerie, fabricante, i);
-
                     #endregion
                 }
                 if (menu == 2)
@@ -226,7 +214,6 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     editar = Convert.ToInt32(Console.ReadLine());
 
                     alterarEquipamento(ref nome, ref fabricante, ref preco, ref nSerie, ref data1, editar);
-                    exibir(nome, nSerie, fabricante, editar);
 
                     #endregion
                 }
@@ -240,11 +227,12 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     #endregion
                 }
 
-                Console.WriteLine();
-                i = 0;
+                
+               
 
                 if (menu == 4)
                 {
+                    i = 0;
                     #region ler dados do chamado
 
                     lerChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, i);
@@ -270,6 +258,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 }
                 if (menu == 5)
                 {
+                    i = 0;
                     Console.WriteLine("Digite a posição do chamado para ser alterado: ");
                     posicaoChamado = Convert.ToInt32(Console.ReadLine());  
                     #region editar chamado
@@ -292,22 +281,29 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                     #endregion
                 }
-                if (menu == 5)
+                if (menu == 6)
                 {
+                    i = 0;
                     #region Exluir Chamado
                     Console.WriteLine("Digite a posição do chamado para ser excluida: ");
                     posicaoChamado2 = Convert.ToInt32(Console.ReadLine());
                     excluirChamado(ref nEquipamento, ref tituloChamado, ref dataChamado, ref descricaoChamado, posicaoChamado2);
                     #endregion
                 }
+                if(menu == 7)
+                {
+                    exibir(nome, fabricante, preco, nSerie, data1);
+                }
 
+                
                 do {
                     Console.WriteLine("Deseja continuar? Didite 'C' para continuar ou 'S' para sair: ");
                     sairOuContinuar = Convert.ToChar(Console.ReadLine());
+
                 }while (sairOuContinuar != 'C' && sairOuContinuar != 'S');
 
                 i = i + 1;
-            }while (sairOuContinuar == 'C');
+            } while (sairOuContinuar == 'C');
         }
     }
 }
