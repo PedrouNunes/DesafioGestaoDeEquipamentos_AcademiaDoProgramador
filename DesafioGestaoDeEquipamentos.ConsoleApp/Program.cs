@@ -92,24 +92,24 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
             }
             static void lerChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string dataChamado, ref int nEquipamento, int i)
             {
-                Console.WriteLine("Digite o título do chamado: ");
+                Console.WriteLine("Digite o título do chamado " + i + ": ");
                 tituloChamado[i] = Console.ReadLine();
 
                 Console.WriteLine();
 
-                Console.WriteLine("Digite a posição do equipamento equivalente ao chamado: ");
+                Console.WriteLine("Digite a posição do equipamento equivalente ao chamado " + i + ": ");
                 nEquipamento = Convert.ToInt32(Console.ReadLine());
 
                 Console.WriteLine();
 
                 Console.WriteLine();
 
-                Console.WriteLine("Digite a descrição do equipamento equivalente ao chamado: ");
+                Console.WriteLine("Digite a descrição do equipamento equivalente ao chamado " + i + ": ");
                 descricaoChamado[i] = Console.ReadLine();
 
                 Console.WriteLine();
 
-                Console.WriteLine("Digite a data de abertura do chamado: ");
+                Console.WriteLine("Digite a data de abertura do chamado " + i + ": ");
                 dataChamado = Console.ReadLine();
 
                 Console.WriteLine();
@@ -183,6 +183,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
             string[] tituloChamado = new string[1000];
             string[] descricaoChamado = new string[1000];
             int i = 0;
+            int c = 0;
 
             #endregion
 
@@ -226,22 +227,18 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                     #endregion
                 }
-
-                
-               
-
+           
                 if (menu == 4)
                 {
-                    i = 0;
                     #region ler dados do chamado
 
-                    lerChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, i);
+                    lerChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, c);
 
-                    String[] dataQuebrada = dataChamado.Split("/");
+                    string[] dataQuebrada = dataChamado.Split("/");
 
-                    dia = Convert.ToInt32(dataQuebrada[i]);
-                    mes = Convert.ToInt32(dataQuebrada[i + 1]);
-                    ano = Convert.ToInt32(dataQuebrada[i + 2]);
+                    dia = Convert.ToInt32(dataQuebrada[c]);
+                    mes = Convert.ToInt32(dataQuebrada[c + 1]);
+                    ano = Convert.ToInt32(dataQuebrada[c + 2]);
 
                     DateTime dataAberturaChamado = new DateTime(ano, mes, dia);
 
@@ -251,14 +248,13 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                     Console.WriteLine("Titulo do chamado: " + tituloChamado[nEquipamento] + ", nome do equipamento editado: " + nome[nEquipamento] + ", data de abertura do chamado: " + dataChamado + ", numero de dias que o chamado está aberto: " + dias);
 
-                    i = i + 1;
+                    c = c + 1;
 
 
                     #endregion
                 }
                 if (menu == 5)
                 {
-                    i = 0;
                     Console.WriteLine("Digite a posição do chamado para ser alterado: ");
                     posicaoChamado = Convert.ToInt32(Console.ReadLine());  
                     #region editar chamado
@@ -283,7 +279,6 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 }
                 if (menu == 6)
                 {
-                    i = 0;
                     #region Exluir Chamado
                     Console.WriteLine("Digite a posição do chamado para ser excluida: ");
                     posicaoChamado2 = Convert.ToInt32(Console.ReadLine());
