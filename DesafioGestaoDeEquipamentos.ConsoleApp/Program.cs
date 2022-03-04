@@ -174,7 +174,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 dias[alterarChamado] = diasAberto.TotalDays;
             }
-            static void excluirChamado(ref string[] titulo, ref string[] descricaoChamado, ref int[] posicao, ref string[]data)
+            static void excluirChamado(ref string[] titulo, ref string[] descricaoChamado, ref int[] posicao, ref string[]data, ref int[] nID)
             {
                 Console.Write("Digite a posição do chamado que deseja excluir: ");
                 int excluir = Convert.ToInt32(Console.ReadLine());
@@ -187,17 +187,30 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                         posicao[l] = -1;
                         descricaoChamado[l] = null;
                         data[l] = null;
+                        nID[l] = -1;
                     }
                 }
             }
-            static void exibirChamado(ref string[] titulo, ref string[] descricaoChamado, ref int[] posicao, ref string[] data, ref double[] dias, ref string[] nome)
+            static void exibirChamado(ref string[] titulo, ref string[] descricaoChamado, ref int[] posicao, ref string[] data, ref double[] dias, ref string[] nome, ref string[] nomeSolicitante, ref string[] email, ref string[] telefone, ref int[] nID)
             {
                 for (int l = 0; l < titulo.Length; l++)
                 {
-                    if (titulo[l] != null && descricaoChamado[l] != null && data[l] != null && posicao[l] != -1)
+                    if (titulo[l] != null && descricaoChamado[l] != null && data[l] != null && posicao[l] != -1 && nID[l] != -1)
                     {
-                    Console.WriteLine("Titulo do chamado: " + titulo[l] + ", nome do equipamento: " + nome[l] + ", data de abertura do chamado: " + data[l] + ", numero de dias que o chamado está aberto: " + dias[l]);
+                        Console.WriteLine("Titulo do chamado: " + titulo[l] + ", nome do equipamento: " + nome[l] + ", data de abertura do chamado: " + data[l] + ", numero de dias que o chamado está aberto: " + dias[l]);
                     }
+                }
+
+                for (int i = 0; i < nomeSolicitante.Length; i++)
+                {
+                    if (nomeSolicitante[i] != null && email[i] != null && telefone[i] != null)
+                    {
+                        Console.Write("ID do solicitante: " + i + ", nome do solicitante: " + nomeSolicitante[i]);
+                        Console.WriteLine();
+                        Console.Write("Email do solicitante: " + email[i] + ", numero de telefone do solicitante: " + telefone[i]);
+                        Console.WriteLine();
+                    }
+
                 }
             }
             static void lerSolicitante(ref string[] nomeSolicitante, ref string[] email, ref string[] telefone , int s) {
@@ -395,15 +408,15 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 }
                 if (menu == 6)
                 {
-                    alterarChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, ref dias);
+                    alterarChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, ref dias, ref nID);
                 }
                 if (menu == 7)
                 {
-                    excluirChamado(ref tituloChamado, ref descricaoChamado, ref nEquipamento, ref dataChamado);
+                    excluirChamado(ref tituloChamado, ref descricaoChamado, ref nEquipamento, ref dataChamado, ref nID);
                 }
                 if (menu == 8)
                 {
-                    exibirChamado(ref tituloChamado, ref descricaoChamado, ref nEquipamento, ref dataChamado, ref dias, ref nome);
+                    exibirChamado(ref tituloChamado, ref descricaoChamado, ref nEquipamento, ref dataChamado, ref dias, ref nome, ref nomeSolicitante, ref email, ref nTelefone, ref nID);
                 }
                 #endregion
 
