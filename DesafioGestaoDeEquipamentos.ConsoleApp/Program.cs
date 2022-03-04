@@ -105,7 +105,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     }
                 }
             }
-            static void lerChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string[] dataChamado, ref int[] nEquipamento, int c, double[] dias)
+            static void lerChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string[] dataChamado, ref int[] nEquipamento, int c, double[] dias, ref int[] nID)
             {
                 Console.Write("Digite o título do chamado " + c + ": ");
                 tituloChamado[c] = Console.ReadLine();
@@ -127,13 +127,18 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 Console.WriteLine();
 
+                Console.Write("Registre o numero de ID do solicitant do chamado " + c + ": ");
+                nID[c] = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine();
+
                 DateTime dataAberturaChamado = Convert.ToDateTime(dataChamado[c]);
 
                 TimeSpan diasAberto = DateTime.Today - dataAberturaChamado;
 
                 dias[c] = diasAberto.TotalDays;
             }
-            static void alterarChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string[] dataChamado, ref int[] nEquipamento, ref double[] dias)
+            static void alterarChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string[] dataChamado, ref int[] nEquipamento, ref double[] dias, ref int[] nID)
             {
                 Console.Write("Digite a posição do chamado que você deseja alterar: ");
                 int alterarChamado = Convert.ToInt32(Console.ReadLine());
@@ -155,6 +160,11 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 Console.Write("Edite a data de abertura do chamado " + alterarChamado + ": ");
                 dataChamado[alterarChamado] = Console.ReadLine();
+
+                Console.WriteLine();
+
+                Console.Write("Registre o numero de ID do solicitant do chamado " + alterarChamado + ": ");
+                nID[alterarChamado] = Convert.ToInt32(Console.ReadLine());
 
                 Console.WriteLine();
 
@@ -287,7 +297,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
             string[] nomeSolicitante = new string[1000];
             string[] email = new string[1000];
             string[] nTelefone = new string[1000];
-
+            int[] nID = new int[1000];
             #endregion
 
             do
