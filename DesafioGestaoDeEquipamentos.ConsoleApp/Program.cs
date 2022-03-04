@@ -190,11 +190,86 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     }
                 }
             }
+            static void lerSolicitante(ref string[] nomeSolicitante, ref string[] email, ref string[] telefone , int s) {
+                do
+                {
+                    Console.Write("Digite o nome do solicitante " + s + ": ");
+                    nomeSolicitante[s] = Console.ReadLine();
+                }while(nomeSolicitante.Length < 6);
+
+                Console.WriteLine();
+
+                Console.Write("Digite o email do solicitante " + s + ": ");
+                email[s] = Console.ReadLine();
+
+                Console.WriteLine();
+
+                Console.Write("Digite o telefone do solicitante " + s + ": ");
+                telefone[s] = Console.ReadLine();
+            }
+            static void alterarSolicitante(ref string[] nomeSolicitante, ref string[] email, ref string[] telefone)
+            {
+                Console.Write("Digite o id do solicitante que deseja editar: ");
+                int editar = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine();
+
+                do
+                {
+                    Console.Write("Edite o nome do solicitante " + editar + ": ");
+                    nomeSolicitante[editar] = Console.ReadLine();
+                } while (nomeSolicitante.Length < 6);
+
+                Console.WriteLine();
+
+                Console.Write("Edite o email do solicitante " + editar + ": ");
+                email[editar] = Console.ReadLine();
+
+                Console.WriteLine();
+
+                Console.Write("Edite o telefone do solicitante " + editar + ": ");
+                telefone[editar] = Console.ReadLine();
+
+                Console.WriteLine();
+            }
+            static void excluirSolicitante(string[] nomeSolicitante, string[] email, string[] telefone) {
+               
+                Console.Write("Digite o ID do solicitante que deseja excluir: ");
+                int excluir = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine();
+
+                for (int i = 0; i < nomeSolicitante.Length; i++)
+                {
+                    if (i == excluir)
+                    {
+                        nomeSolicitante [i] = null;
+                        email [i] = null;
+                        telefone [i] = null;
+                    }
+                }
+
+            }
+            static void exibirSolicitante(string[] nomeSolicitante, string[] email, string[] telefone)
+            {
+                for (int i = 0; i < nomeSolicitante.Length; i++)
+                {
+                    if (nomeSolicitante[i] != null && email[i] != null && telefone[i] != null)
+                    {
+                        Console.Write("ID do solicitante: " + i + ", nome do solicitante: " + nomeSolicitante[i]);
+                        Console.WriteLine();
+                        Console.Write("Email do solicitante: " + email[i] + ", numero de telefone do solicitante: " + telefone[i]);
+                        Console.WriteLine();
+                    }
+                }
+            }
 
             #region Declaração de Variáveis
             int menu;
             char sairOuContinuar;
-            
+            int i = 0;
+            int c = 0;
+            int s = 0;
 
             string[] nome = new string[1000];
             string[] fabricante = new string[1000];
@@ -206,10 +281,13 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
             string[] tituloChamado = new string[1000];
             string[] descricaoChamado = new string[1000];
-            int i = 0;
-            int c = 0;
             int[] nEquipamento = new int[1000];
-            double[] dias = new double[1000]; 
+            double[] dias = new double[1000];
+
+            string[] nomeSolicitante = new string[1000];
+            string[] email = new string[1000];
+            string[] nTelefone = new string[1000];
+
             #endregion
 
             do
@@ -217,18 +295,54 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 do
                 {
                     Console.WriteLine();
-                    Console.WriteLine("Digite 1 para adicionar um equipamento: ");
-                    Console.WriteLine("Digite 2 para editar um equipamento: ");
-                    Console.WriteLine("Digite 3 para excluir um equipamento: ");
-                    Console.WriteLine("Digite 4 para ver os equipamentos: ");
-                    Console.WriteLine("Digite 5 para controle de chamados: ");
-                    Console.WriteLine("Digite 6 para editar um chamado: ");
-                    Console.WriteLine("Digite 7 para excluir um chamado: ");
-                    Console.WriteLine("Digite 8 para ver os chamados: ");
+                    Console.WriteLine("Digite o numero correspondente a função que você deseja executar: ");
+                    Console.WriteLine(" 1 - adicionar um equipamento. ");
+                    Console.WriteLine(" 2 - editar um equipamento. ");
+                    Console.WriteLine(" 3 - excluir um equipamento. ");
+                    Console.WriteLine(" 4 - visualizar os equipamentos. ");
+                    Console.WriteLine(" 5 - controle de chamados. ");
+                    Console.WriteLine(" 6 - editar um chamado. ");
+                    Console.WriteLine(" 7 - excluir um chamado. ");
+                    Console.WriteLine(" 8 - visualizar os chamados. ");
+                    Console.WriteLine(" 9 - registrar solicitante. ");
+                    Console.WriteLine(" 10 - editar solicitante. ");
+                    Console.WriteLine(" 11 - excluir solicitante. ");
+                    Console.WriteLine(" 12 - visualizar solicitante. ");
+                    Console.WriteLine();
+                    Console.Write("Resposta: ");
+
                     menu = Convert.ToInt32(Console.ReadLine());
-                } while (menu != 1 && menu != 2 && menu != 3 && menu != 4 && menu != 5 && menu != 6 && menu != 7 && menu != 8);
+                } while (menu != 1 && menu != 2 && menu != 3 && menu != 4 && menu != 5 && menu != 6 && menu != 7 && menu != 8 && menu != 9 && menu != 10 && menu != 11 && menu != 12);
 
                 Console.WriteLine();
+
+                #region Solicitante
+                if (menu == 9)
+                {
+                    lerSolicitante(ref nomeSolicitante, ref email, ref nTelefone, s);
+                    s = s + 1;
+                    Console.WriteLine();
+                }
+
+                if (menu == 10)
+                {
+                    alterarSolicitante(ref nomeSolicitante, ref email, ref nTelefone);
+                    Console.WriteLine();
+                }
+
+                if (menu == 11)
+                {
+                    excluirSolicitante(nomeSolicitante, email, nTelefone);
+                    Console.WriteLine();
+                }
+
+                if (menu == 12)
+                {
+                    exibirSolicitante(nomeSolicitante, email, nTelefone);
+                    Console.WriteLine();
+                }
+                #endregion
+
                 #region Equipamento
                 if (menu == 1)
                 {
@@ -282,6 +396,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     exibirChamado(ref tituloChamado, ref descricaoChamado, ref nEquipamento, ref dataChamado, ref dias, ref nome);
                 }
                 #endregion
+
                 do
                 {
                     Console.WriteLine();
