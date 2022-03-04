@@ -1,0 +1,1 @@
+# DesafioGestaoDeEquipamentos_AcademiaDoProgramador
