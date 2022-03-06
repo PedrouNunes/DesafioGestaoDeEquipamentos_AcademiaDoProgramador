@@ -14,8 +14,11 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                     Console.WriteLine();
 
+                do
+                {
                     Console.Write("Digite o preço de aquisição do equipamento " + i + ": ");
                     preco[i] = Convert.ToDouble(Console.ReadLine());
+                } while (preco[i] == 0 && preco[i] < 0);
 
                     Console.WriteLine();
 
@@ -105,7 +108,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     }
                 }
             }
-            static void lerChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string[] dataChamado, ref int[] nEquipamento, int c, double[] dias, ref int[] nID)
+            static void lerChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string[] dataChamado, ref int[] nEquipamento, int c, ref double[] dias, ref int[] nID)
             {
                 Console.Write("Digite o título do chamado " + c + ": ");
                 tituloChamado[c] = Console.ReadLine();
@@ -390,7 +393,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 {
                     #region ler dados do chamado
 
-                    lerChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, c, dias);
+                    lerChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, ref c, ref dias, ref nID);
                      c = c + 1;
                     #endregion
                 }
