@@ -10,9 +10,9 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 do {
                     Console.Write("Digite o nome do equipamento " + i + ": ");
                     nome[i] = Console.ReadLine();
-                }while(nome[i].Length < 6);
+                } while (nome[i].Length < 6);
 
-                    Console.WriteLine();
+                Console.WriteLine();
 
                 do
                 {
@@ -20,21 +20,41 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     preco[i] = Convert.ToDouble(Console.ReadLine());
                 } while (preco[i] == 0 && preco[i] < 0);
 
-                    Console.WriteLine();
+                Console.WriteLine();
 
+                do
+                {
                     Console.Write("Digite o numero de série do equipamento " + i + ": ");
                     nSerie[i] = Console.ReadLine();
+                } while (nSerie[i] == null);
 
-                    Console.WriteLine();
+                Console.WriteLine();
 
-                    Console.Write("Digite a data de fabricação do equipamento " + i + ": ");
-                    data1[i] = Console.ReadLine();
+                if (i > 0)
+                {
+                    do
+                    {
+                        Console.Write("Digite a data de fabricação do equipamento " + i + ": ");
+                        data1[i] = Console.ReadLine();
+                    } while (data1[i].Length == 0 && data1[i] != data1[i-1]);
+                }
+                else
+                {
+                    do
+                    {
+                        Console.Write("Digite a data de fabricação do equipamento " + i + ": ");
+                        data1[i] = Console.ReadLine();
+                    } while (data1[i].Length == 0);
+                }
+  
 
-                    Console.WriteLine();
+                Console.WriteLine();
 
+                do { 
                     Console.Write("Digite o nome do fabricante: ");
                     fabricante[i] = Console.ReadLine();
-                    Console.WriteLine();
+                Console.WriteLine();
+                 }while (fabricante[i] == null);
             }
             static void alterarEquipamento(ref string[] nome, ref string[] fabricante, ref double[] preco, ref string[] nSerie, ref string[] data1)
             {
@@ -393,7 +413,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 {
                     #region ler dados do chamado
 
-                    lerChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, ref c, ref dias, ref nID);
+                    lerChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, c, ref dias, ref nID);
                      c = c + 1;
                     #endregion
                 }
