@@ -125,10 +125,11 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     {
                         Console.WriteLine("Nome do equipamento " + j + ": " + nome[j] + ", numero de série: " + nSerie[j] + ", fabricante: " + fabricante[j]);
                         Console.WriteLine();
+                        Console.WriteLine();
                     }
                 }
             }
-            static void lerChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string[] dataChamado, ref int[] nEquipamento, int c, ref double[] dias, ref int[] nID)
+            static void lerChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string[] dataChamado, ref int[] nEquipamento, int c, ref double[] dias, ref int[] nID, ref int[] equipamentosMaisProblematicos, ref char[] chamadoFechado)
             {
                 Console.Write("Digite o título do chamado " + c + ": ");
                 tituloChamado[c] = Console.ReadLine();
@@ -138,10 +139,12 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 Console.Write("Digite a posição do equipamento equivalente ao chamado " + c + ": ");
                 nEquipamento[c] = Convert.ToInt32(Console.ReadLine());
 
+                equipamentosMaisProblematicos[nEquipamento[c]] = equipamentosMaisProblematicos[nEquipamento[c]] + 1;
+
                 Console.WriteLine();
 
                 Console.Write("Digite a descrição do equipamento equivalente ao chamado " + c + ": ");
-                descricaoChamado[c] = Console.ReadLine();
+                descricaoChamado[c] = Console.ReadLine();        
 
                 Console.WriteLine();
 
@@ -150,8 +153,13 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 Console.WriteLine();
 
-                Console.Write("Registre o numero de ID do solicitant do chamado " + c + ": ");
+                Console.Write("Registre o numero de ID do solicitante do chamado " + c + ": ");
                 nID[c] = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine();
+
+                Console.Write("Deseja alterar a situação do chamado para fechado?Digite S para sim e N para não: ");
+                chamadoFechado[c] = Convert.ToChar(Console.ReadLine());
 
                 Console.WriteLine();
 
@@ -161,7 +169,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 dias[c] = diasAberto.TotalDays;
             }
-            static void alterarChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string[] dataChamado, ref int[] nEquipamento, ref double[] dias, ref int[] nID)
+            static void alterarChamado(ref string[] tituloChamado, ref string[] descricaoChamado, ref string[] dataChamado, ref int[] nEquipamento, ref double[] dias, ref int[] nID, ref char[] chamadoFechado)
             {
                 Console.Write("Digite a posição do chamado que você deseja alterar: ");
                 int alterarChamado = Convert.ToInt32(Console.ReadLine());
@@ -191,6 +199,11 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
 
                 Console.WriteLine();
 
+               Console.Write("Deseja alterar a situação do chamado para fechado?Digite S para sim e N para não: ");
+               chamadoFechado[alterarChamado] = Convert.ToChar(Console.ReadLine());
+
+                Console.WriteLine();
+
                 DateTime dataAberturaChamado = Convert.ToDateTime(dataChamado[alterarChamado]);
 
                 TimeSpan diasAberto = DateTime.Today - dataAberturaChamado;
@@ -214,15 +227,36 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     }
                 }
             }
-            static void exibirChamado(ref string[] titulo, ref string[] descricaoChamado, ref int[] posicao, ref string[] data, ref double[] dias, ref string[] nome, ref string[] nomeSolicitante,  ref int[] nID)
+            static void exibirChamado(ref string[] titulo, ref string[] descricaoChamado, ref int[] posicao, ref string[] data, ref double[] dias, ref string[] nome, ref string[] nomeSolicitante,  ref int[] nID, ref char[] chamadoFechado)
             {
+                Console.WriteLine("Chamados fechados: ");
                 for (int l = 0; l < titulo.Length; l++)
                 {
-                    if (titulo[l] != null && descricaoChamado[l] != null && data[l] != null && posicao[l] != -1 && nID[l] != -1)
+                    if (chamadoFechado[l] == 'S')
                     {
-                        Console.WriteLine("Titulo do chamado: " + titulo[l] + ", nome do equipamento: " + nome[l] + ", data de abertura do chamado: " + data[l] + ", numero de dias que o chamado está aberto: " + dias[l] + ", nome do solicitante: " + nomeSolicitante[nID[l]]);
+                        if (titulo[l] != null && descricaoChamado[l] != null && data[l] != null && posicao[l] != -1 && nID[l] != -1)
+                        {
+                            Console.WriteLine("Titulo do chamado: " + titulo[l] + ", nome do equipamento: " + nome[l] + ", data de abertura do chamado: " + data[l] + ", numero de dias que o chamado está aberto: " + dias[l] + ", nome do solicitante: " + nomeSolicitante[nID[l]]);
+                            Console.WriteLine();
+                        }
                     }
                 }
+
+                Console.WriteLine();
+
+                Console.WriteLine("Chamados abertos: ");
+                for (int l = 0; l < titulo.Length; l++)
+                {
+                    if (chamadoFechado[l] == 'N')
+                    {
+                        if (titulo[l] != null && descricaoChamado[l] != null && data[l] != null && posicao[l] != -1 && nID[l] != -1)
+                        {
+                            Console.WriteLine("Titulo do chamado: " + titulo[l] + ", nome do equipamento: " + nome[l] + ", data de abertura do chamado: " + data[l] + ", numero de dias que o chamado está aberto: " + dias[l] + ", nome do solicitante: " + nomeSolicitante[nID[l]]);
+                            Console.WriteLine();
+                        }
+                    }
+                }
+
             }
             static void lerSolicitante(ref string[] nomeSolicitante, ref string[] email, ref string[] telefone , int s) {
                 do
@@ -297,7 +331,14 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                     }
                 }
             }
-
+            
+            static void equipamentosQueMaisApresentaramProblemasEmOrdemDecrescente(int[] equipamentosMaisProblematicos, int c)
+            {
+                for (int i = 0; i <= c; i++)
+                {
+                    
+                }
+            }
             #region Declaração de Variáveis
             int menu;
             char sairOuContinuar;
@@ -322,6 +363,9 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
             string[] email = new string[1000];
             string[] nTelefone = new string[1000];
             int[] nID = new int[1000];
+
+            char[] chamadoFechado = new char[1000];
+            int[] equipamentosMaisProblematicos = new int[1000];
             #endregion
 
             do
@@ -413,13 +457,13 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 {
                     #region ler dados do chamado
 
-                    lerChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, c, ref dias, ref nID);
+                    lerChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, c, ref dias, ref nID, ref equipamentosMaisProblematicos, ref chamadoFechado);
                      c = c + 1;
                     #endregion
                 }
                 if (menu == 6)
                 {
-                    alterarChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, ref dias, ref nID);
+                    alterarChamado(ref tituloChamado, ref descricaoChamado, ref dataChamado, ref nEquipamento, ref dias, ref nID, ref chamadoFechado);
                 }
                 if (menu == 7)
                 {
@@ -427,7 +471,7 @@ namespace DesafioGestaoDeEquipamentos.ConsoleApp
                 }
                 if (menu == 8)
                 {
-                    exibirChamado(ref tituloChamado, ref descricaoChamado, ref nEquipamento, ref dataChamado, ref dias, ref nome, ref nomeSolicitante, ref nID);
+                    exibirChamado(ref tituloChamado, ref descricaoChamado, ref nEquipamento, ref dataChamado, ref dias, ref nome, ref nomeSolicitante, ref nID, ref chamadoFechado);
                 }
                 #endregion
 
